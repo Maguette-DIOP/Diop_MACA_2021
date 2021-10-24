@@ -3,7 +3,7 @@ package filesystem;
 import java.util.List;
 
 public class Repertoire extends ComposantImpl implements Composant, Composite<Composant>{
-    private List<Composant> children =new Composant<Composant>;
+    private List<Composant> children ;
     public Repertoire(String name, Owner owner) {
         super(name, owner);
     }
@@ -11,13 +11,12 @@ public class Repertoire extends ComposantImpl implements Composant, Composite<Co
 
     }
     public String getContent(){
-
     }
     public void appendContent(String name){
-        throw new UnsupportedOperationException("cannot app")
+        throw new UnsupportedOperationException("cannot app");
     }
     public boolean isComposite(){
-
+        return true;
     }
 
     @Override
@@ -32,7 +31,8 @@ public class Repertoire extends ComposantImpl implements Composant, Composite<Co
 
     @Override
     public boolean removeChild(Composant composant) {
-        r
+        this.children.remove(composant);
+        return false;
     }
 
     @Override
