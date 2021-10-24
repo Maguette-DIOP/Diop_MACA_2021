@@ -1,11 +1,10 @@
 package filesystem;
-
+import java.util.List;
 public abstract class ComposantImpl implements Composant{
     private final String name;
-
+    private List<Composant> children;
     private Owner owner;
-
-    public ComposantImpl(String name,Owner owner) {
+    public ComposantImpl(String name, Owner owner) {
         this.name = name;
         this.owner = owner;
     }
@@ -14,6 +13,9 @@ public abstract class ComposantImpl implements Composant{
     }
     public Owner getOwner(){
         return owner;
+    }
+    public List<Composant> getChildren() {
+        return children;
     }
     public void setOwner(Owner owner, boolean recursive){
         this.owner = owner;
@@ -26,17 +28,18 @@ public abstract class ComposantImpl implements Composant{
 
     @Override
     public Integer getSize() {
-        return null;
+        return children.size();
     }
 
     @Override
     public String getContent() {
+
         return null;
     }
 
     @Override
     public void appendContent(String name) {
-
+        this.children.add(name);
     }
 
     @Override

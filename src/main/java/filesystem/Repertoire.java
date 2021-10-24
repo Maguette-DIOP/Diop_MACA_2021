@@ -8,9 +8,10 @@ public class Repertoire extends ComposantImpl implements Composant, Composite<Co
         super(name, owner);
     }
     public Integer getSize(){
-
+        return children.size();
     }
     public String getContent(){
+        return " ";
     }
     public void appendContent(String name){
         throw new UnsupportedOperationException("cannot app");

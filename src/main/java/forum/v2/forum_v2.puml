@@ -1,0 +1,68 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package forum.v2{
+    enum ComposantType {
+            FORUM, THEME, SALON, MESSAGE
+        }
+
+        interface Composite<T> #MistyRose {
+           sujet():string
+           add(child: T): void
+           remove(index: integer): void
+           size(): integer
+           toString(): string
+        }
+
+        class Forum #MistyRose {
+            - topic: string<<final>>
+            --
+            ~ this(topic: string): Theme
+            ..
+        }
+        Composite <|.. Forum
+        Theme "* -children" <--* Forum
+
+        class Theme #MistyRose {
+             - topic: string<<final>>
+             --
+             ~ this(topic: string): Theme
+             ..
+        }
+
+        Composite <|.. Theme
+        Salon "* -children" <--* Theme
+
+         class Salon #MistyRose {
+             - topic: string<<final>>
+             --
+             ~ this(topic: string): Salon
+             ..
+         }
+
+         Composite <|.. Salon
+         Message "* -children" <--* Salon
+
+         class Message #MistyRose {
+              - topic: string<<final>>
+              - contenu: string<<final>>
+              --
+              ~ this(topic: string,contenu:string): Message
+              ..
+              + sujet(): string
+              ..
+              + toString(): string
+            }
+
+        class FSFactory <<Factory, Singleton>> #TECHNOLOGY {
+            + {static} INSTANCE: FSFactory = new FSFactory() <<final>>
+            - this(): FSFactory
+            + {static} getInstance(): FSFactory
+            + createComposant(type: ComposantType, topic: string): Composite
+        }
+        FSFactory ..> Composite : <<creates>>
+        FSFactory ..> Message : <<creates>>
+        FSFactory ..> ComposantType
+
+}
+@enduml
