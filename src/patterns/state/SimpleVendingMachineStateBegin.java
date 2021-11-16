@@ -19,7 +19,7 @@ public class SimpleVendingMachineStateBegin extends SimpleVendingMachineState {
             c.setState(SimpleVendingMachineStateBegin.getInstance());
         }
         else{
-
+            c.setState(SimpleVendingMachineStateBeginSecond.getInstance());
         }
     }
 
